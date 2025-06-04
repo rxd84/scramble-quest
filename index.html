@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unscramble Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- This is the only part that gets replaced dynamically by script.js -->
+  <div id="main-content"></div>
+
+  <!-- Persistent audio elements (stay outside dynamic replacement) -->
+  <div id="audio-assets">
+    <audio id="monkeySound" src="audio/monkey2.mp3" preload="auto"></audio>
+    <audio id="bgMusic" src="audio/music2.mp3" preload="auto" loop></audio>
+    <audio id="letterClickSound" src="audio/stone1.mp3" preload="auto"></audio>
+    <audio id="sound-click" src="audio/click.mp3" preload="auto"></audio>
+    <audio id="sound-start" src="audio/start.mp3" preload="auto"></audio>
+    <audio id="levelCompleteSound" src="audio/level-complete.mp3" preload="auto"></audio>
+    <audio id="levelFailSound" src="audio/level-over.mp3" preload="auto"></audio>
+    <audio id="hoverSound" src="audio/hover.mp3" preload="auto"></audio>
+
+
+  </div>
+
+  <!-- ✅ Test button placed here -->
+  <button style="position: fixed; top: 20px; left: 20px; z-index: 99999;"
+          onclick="document.getElementById('letterClickSound').play()">Test Letter Sound</button>
+
+  <script src="dynamic_loader.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
