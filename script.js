@@ -349,7 +349,6 @@ document.body.classList.remove("hide-cursor");
         ">
     </div>
   `;
-  applyScale();
 
   // Add styles
   const style = document.createElement('style');
@@ -362,6 +361,7 @@ document.body.classList.remove("hide-cursor");
     }
   `;
   document.head.appendChild(style);
+  applyScale();
 
   const prompt = document.getElementById("startPrompt");
   let fade = false;
@@ -1402,9 +1402,6 @@ if (music && soundIsEnabled && music.paused) {
     </div>
   `;
 
-  // Scale the wrapper after rendering
-  applyScale();
-
   // Add styles
   const style = document.createElement('style');
   style.textContent = `
@@ -1463,6 +1460,8 @@ if (music && soundIsEnabled && music.paused) {
     }
   `;
   document.head.appendChild(style);
+  // Scale the wrapper after rendering
+  applyScale();
 
   const container = document.getElementById('levelButtons');
   const unlocked = JSON.parse(localStorage.getItem('unlockedLevels') || '[1]');
