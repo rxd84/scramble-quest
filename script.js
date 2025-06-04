@@ -1,5 +1,27 @@
 let soundIsEnabled = true;
 
+// Base resolution used for scaling the game screens
+const BASE_WIDTH = 1920;
+const BASE_HEIGHT = 1080;
+
+// Scale the active screen-wrapper element to fit within the viewport
+function applyScale() {
+  const wrapper = document.querySelector('.screen-wrapper');
+  if (!wrapper) return;
+  const scale = Math.min(
+    window.innerWidth / BASE_WIDTH,
+    window.innerHeight / BASE_HEIGHT
+  );
+  wrapper.style.transformOrigin = 'top left';
+  wrapper.style.transform = `scale(${scale})`;
+  if (wrapper.parentElement) {
+    const parent = wrapper.parentElement;
+    parent.style.display = 'flex';
+    parent.style.justifyContent = 'center';
+    parent.style.alignItems = 'center';
+  }
+}
+
 function transitionToScreen(callback) {
   // Get or create fade screen
   let fade = document.getElementById("fade-screen");
@@ -133,7 +155,11 @@ document.head.appendChild(hideCursorStyle);
 
   // Show intro screen
   showIntroScreen();
+  applyScale();
 };
+
+// Recalculate scale whenever the viewport size changes
+window.onresize = applyScale;
 
 function showIntroScreen() {
   const content = document.getElementById('main-content');
@@ -144,8 +170,8 @@ function showIntroScreen() {
       background-image: url("assets/screen1-bg.png");
       background-size: cover;
       background-position: center;
-      height: 100vh;
-      width: 100vw;
+      height: 1080px;
+      width: 1920px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -214,6 +240,7 @@ function showIntroScreen() {
 
   `;
   document.head.appendChild(style);
+  applyScale();
 }
 
 
@@ -274,11 +301,13 @@ function showLogoScreen() {
       background-image: url('assets/logo-screen.png');
       background-size: cover;
       background-position: center;
-      height: 100vh;
-      width: 100vw;
+      height: 1080px;
+      width: 1920px;
     ">
-    </div>
+  </div>
   `;
+
+  applyScale();
 
 
 const music = document.getElementById("bgMusic");
@@ -312,8 +341,8 @@ document.body.classList.remove("hide-cursor");
     <div class="screen-wrapper" style="
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 1920px;
+      height: 1080px;
       background-color: black;
       background-image: url('assets/menu-start.png');
       background-repeat: no-repeat;
@@ -345,6 +374,8 @@ document.body.classList.remove("hide-cursor");
     }
   `;
   document.head.appendChild(style);
+
+  applyScale();
 
   const prompt = document.getElementById("startPrompt");
   let fade = false;
@@ -534,6 +565,8 @@ function showCategorySelection() {
     </div>
   `;
 
+  applyScale();
+
   // Add styles
   const style = document.createElement('style');
   style.textContent = `
@@ -716,6 +749,8 @@ z-index: 2; /* 👈 ensures it's above the normal image */
   const select = document.getElementById("category");
   if (label) label.remove();
   if (select) select.remove();
+
+  applyScale();
 
 }
 
@@ -916,6 +951,7 @@ img.drop-box,
     </div>
   `;
 
+  applyScale();
 
  const game = document.getElementById('game');
 
@@ -1226,11 +1262,13 @@ setTimeout(() => {
     background-image: url('assets/fail-screen.png');
     background-size: cover;
     background-position: center;
-    height: 100vh;
-    width: 100vw;
+    height: 1080px;
+    width: 1920px;
     cursor: none;">
   </div>
 `;
+
+    applyScale();
 
 
     playLevelFailSound();
@@ -1269,10 +1307,12 @@ if (currentLevelNumber === 10) {
         background-image: url('assets/game-complete.png');
         background-size: cover;
         background-position: center;
-        height: 100vh;
-        width: 100vw;">
+        height: 1080px;
+        width: 1920px;">
       </div>
     `;
+
+    applyScale();
 
     // Fade in game-complete audio
     const completeSound = document.getElementById("gameCompleteSound");
@@ -1345,10 +1385,11 @@ if (currentLevelNumber === 10) {
             background-image: url('assets/fail-screen.png');
             background-size: cover;
             background-position: center;
-            height: 100vh;
-            width: 100vw;">
+            height: 1080px;
+            width: 1920px;">
           </div>
         `;
+        applyScale();
         setTimeout(() => {
           const lastCategory = localStorage.getItem("lastCategory") || "food";
           transitionToScreen(() => showLevelSelection(lastCategory));
@@ -1467,6 +1508,8 @@ img.onclick = () => {
 
     container.appendChild(wrapper);
   }
+
+  applyScale();
 }
 
 document.addEventListener("mouseover", (e) => {
