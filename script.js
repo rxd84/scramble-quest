@@ -667,6 +667,7 @@ z-index: 2; /* 👈 ensures it's above the normal image */
     }
   `;
   document.head.appendChild(style);
+  applyScale();
 
   // Add sliced parts
   document.getElementById('selectContainer').innerHTML += `
@@ -1400,6 +1401,9 @@ if (music && soundIsEnabled && music.paused) {
       <div class="level-grid" id="levelButtons"></div>
     </div>
   `;
+
+  // Scale the wrapper after rendering
+  applyScale();
 
   // Add styles
   const style = document.createElement('style');
