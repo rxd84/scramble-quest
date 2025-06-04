@@ -339,10 +339,9 @@ document.body.classList.remove("hide-cursor");
 
   content.innerHTML = `
     <div class="screen-wrapper" style="
-      position: fixed;
-      top: 0; left: 0;
       width: 1920px;
       height: 1080px;
+      position: relative;
       background-color: black;
       background-image: url('assets/menu-start.png');
       background-repeat: no-repeat;
