@@ -1,5 +1,19 @@
 let soundIsEnabled = true;
 
+function applyScale() {
+  const wrapper = document.querySelector('.screen-wrapper');
+  if (!wrapper) return;
+  const baseWidth = 1920;
+  const baseHeight = 1080;
+  const scaleX = window.innerWidth / baseWidth;
+  const scaleY = window.innerHeight / baseHeight;
+  const scale = Math.min(scaleX, scaleY);
+  wrapper.style.transform = `scale(${scale})`;
+  wrapper.style.transformOrigin = 'top left';
+}
+
+window.addEventListener('resize', applyScale);
+
 function transitionToScreen(callback) {
   // Get or create fade screen
   let fade = document.getElementById("fade-screen");
@@ -144,8 +158,8 @@ function showIntroScreen() {
       background-image: url("assets/screen1-bg.png");
       background-size: cover;
       background-position: center;
-      height: 100vh;
-      width: 100vw;
+      height: 1080px;
+      width: 1920px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -214,6 +228,7 @@ function showIntroScreen() {
 
   `;
   document.head.appendChild(style);
+  applyScale();
 }
 
 
@@ -274,11 +289,12 @@ function showLogoScreen() {
       background-image: url('assets/logo-screen.png');
       background-size: cover;
       background-position: center;
-      height: 100vh;
-      width: 100vw;
+      height: 1080px;
+      width: 1920px;
     ">
     </div>
   `;
+  applyScale();
 
 
 const music = document.getElementById("bgMusic");
@@ -312,8 +328,8 @@ document.body.classList.remove("hide-cursor");
     <div class="screen-wrapper" style="
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 1920px;
+      height: 1080px;
       background-color: black;
       background-image: url('assets/menu-start.png');
       background-repeat: no-repeat;
@@ -333,6 +349,7 @@ document.body.classList.remove("hide-cursor");
         ">
     </div>
   `;
+  applyScale();
 
   // Add styles
   const style = document.createElement('style');
@@ -818,7 +835,7 @@ img.drop-box,
 
 
 
-    <div style="width: 100vw; display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center;">
       <div class="screen-wrapper" style="
         width: 1920px;
         height: 1080px;
@@ -916,6 +933,7 @@ img.drop-box,
     </div>
   `;
 
+  applyScale();
 
  const game = document.getElementById('game');
 
@@ -1221,16 +1239,17 @@ setTimeout(() => {
     document.body.style.cursor = "none";
 
     // ✅ Render fail screen
-   document.getElementById("main-content").innerHTML = `
-  <div class="screen-wrapper" style="
-    background-image: url('assets/fail-screen.png');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
-    cursor: none;">
-  </div>
-`;
+  document.getElementById("main-content").innerHTML = `
+      <div class="screen-wrapper" style="
+        background-image: url('assets/fail-screen.png');
+        background-size: cover;
+        background-position: center;
+        height: 1080px;
+        width: 1920px;
+        cursor: none;">
+      </div>
+  `;
+  applyScale();
 
 
     playLevelFailSound();
@@ -1269,10 +1288,11 @@ if (currentLevelNumber === 10) {
         background-image: url('assets/game-complete.png');
         background-size: cover;
         background-position: center;
-        height: 100vh;
-        width: 100vw;">
+        height: 1080px;
+        width: 1920px;">
       </div>
     `;
+    applyScale();
 
     // Fade in game-complete audio
     const completeSound = document.getElementById("gameCompleteSound");
@@ -1310,8 +1330,8 @@ if (currentLevelNumber === 10) {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            width: 100vw;
-            height: 100vh;
+            width: 1920px;
+            height: 1080px;
             background: url('${gemImage}') no-repeat center center;
             background-size: contain;
             background-repeat: no-repeat;
@@ -1325,6 +1345,7 @@ if (currentLevelNumber === 10) {
 
       transitionToScreen(() => {
         document.getElementById("main-content").innerHTML = `${scoreContent}`;
+        applyScale();
         const completeAudio = document.getElementById("levelCompleteSound");
         if (completeAudio) {
           completeAudio.onended = () => {
@@ -1345,10 +1366,11 @@ if (currentLevelNumber === 10) {
             background-image: url('assets/fail-screen.png');
             background-size: cover;
             background-position: center;
-            height: 100vh;
-            width: 100vw;">
+            height: 1080px;
+            width: 1920px;">
           </div>
         `;
+        applyScale();
         setTimeout(() => {
           const lastCategory = localStorage.getItem("lastCategory") || "food";
           transitionToScreen(() => showLevelSelection(lastCategory));
